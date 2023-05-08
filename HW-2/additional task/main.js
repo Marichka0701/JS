@@ -123,6 +123,3 @@ switch (lottery) {
         console.log('sorry. I wish you lucky for next time.')
 }
 
-
-
-
