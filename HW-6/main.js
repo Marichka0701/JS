@@ -37,7 +37,7 @@ console.log('---------------------------------------------------------');
 
 
 // - є масив чисел [10,8,-7,55,987,-1011,0,1050,0] . за допомоги map  перетворити всі об'єкти в масиві на стрінгові.
-const numbers = [10,8,-7,55,987,-1011,0,1050,0];
+const numbers = [10, 8, -7, 55, 987, -1011, 0, 1050, 0];
 console.log(numbers.map(value => value.toString()));
 console.log('---------------------------------------------------------');
 
@@ -79,8 +79,8 @@ console.log('---------------------------------------------------------');
 
 // -- за допомоги map перетворити кожен елемент на наступний тип {id,title,monthDuration}
 let i = 1;
-console.log(coursesAndDurationArray.map(value =>  {
-    return  {
+console.log(coursesAndDurationArray.map(value => {
+    return {
         id: `${i++}`,
         title: value.title,
         monthDuration: value.monthDuration
@@ -89,46 +89,45 @@ console.log(coursesAndDurationArray.map(value =>  {
 console.log('---------------------------------------------------------');
 
 
-
 // =========================
 //     описати колоду карт (від 6 до туза без джокерів)
 let cards = [
-    { cardSuit: 'spade', value: '6', color: 'black' },
-    { cardSuit: 'diamond', value: '6', color: 'red' },
-    { cardSuit: 'heart', value: '6', color: 'red' },
-    { cardSuit: 'clubs', value: '6', color: 'black' },
-    { cardSuit: 'spade', value: '7', color: 'black' },
-    { cardSuit: 'diamond', value: '7', color: 'red' },
-    { cardSuit: 'heart', value: '7', color: 'red' },
-    { cardSuit: 'clubs', value: '7', color: 'black' },
-    { cardSuit: 'spade', value: '8', color: 'black' },
-    { cardSuit: 'diamond', value: '8', color: 'red' },
-    { cardSuit: 'heart', value: '8', color: 'red' },
-    { cardSuit: 'clubs', value: '8', color: 'black' },
-    { cardSuit: 'spade', value: '9', color: 'black' },
-    { cardSuit: 'diamond', value: '9', color: 'red' },
-    { cardSuit: 'heart', value: '9', color: 'red' },
-    { cardSuit: 'clubs', value: '9', color: 'black' },
-    { cardSuit: 'spade', value: '10', color: 'black' },
-    { cardSuit: 'diamond', value: '10', color: 'red' },
-    { cardSuit: 'heart', value: '10', color: 'red' },
-    { cardSuit: 'clubs', value: '10', color: 'black' },
-    { cardSuit: 'spade', value: 'jack', color: 'black' },
-    { cardSuit: 'diamond', value: 'jack', color: 'red' },
-    { cardSuit: 'heart', value: 'jack', color: 'red' },
-    { cardSuit: 'clubs', value: 'jack', color: 'black' },
-    { cardSuit: 'spade', value: 'queen', color: 'black' },
-    { cardSuit: 'diamond', value: 'queen', color: 'red' },
-    { cardSuit: 'heart', value: 'queen', color: 'red' },
-    { cardSuit: 'clubs', value: 'queen', color: 'black' },
-    { cardSuit: 'spade', value: 'king', color: 'black' },
-    { cardSuit: 'diamond', value: 'king', color: 'red' },
-    { cardSuit: 'heart', value: 'king', color: 'red' },
-    { cardSuit: 'clubs', value: 'king', color: 'black' },
-    { cardSuit: 'spade', value: 'ace', color: 'black' },
-    { cardSuit: 'diamond', value: 'ace', color: 'red' },
-    { cardSuit: 'heart', value: 'ace', color: 'red' },
-    { cardSuit: 'clubs', value: 'ace', color: 'black' },
+    {cardSuit: 'spade', value: '6', color: 'black'},
+    {cardSuit: 'diamond', value: '6', color: 'red'},
+    {cardSuit: 'heart', value: '6', color: 'red'},
+    {cardSuit: 'clubs', value: '6', color: 'black'},
+    {cardSuit: 'spade', value: '7', color: 'black'},
+    {cardSuit: 'diamond', value: '7', color: 'red'},
+    {cardSuit: 'heart', value: '7', color: 'red'},
+    {cardSuit: 'clubs', value: '7', color: 'black'},
+    {cardSuit: 'spade', value: '8', color: 'black'},
+    {cardSuit: 'diamond', value: '8', color: 'red'},
+    {cardSuit: 'heart', value: '8', color: 'red'},
+    {cardSuit: 'clubs', value: '8', color: 'black'},
+    {cardSuit: 'spade', value: '9', color: 'black'},
+    {cardSuit: 'diamond', value: '9', color: 'red'},
+    {cardSuit: 'heart', value: '9', color: 'red'},
+    {cardSuit: 'clubs', value: '9', color: 'black'},
+    {cardSuit: 'spade', value: '10', color: 'black'},
+    {cardSuit: 'diamond', value: '10', color: 'red'},
+    {cardSuit: 'heart', value: '10', color: 'red'},
+    {cardSuit: 'clubs', value: '10', color: 'black'},
+    {cardSuit: 'spade', value: 'jack', color: 'black'},
+    {cardSuit: 'diamond', value: 'jack', color: 'red'},
+    {cardSuit: 'heart', value: 'jack', color: 'red'},
+    {cardSuit: 'clubs', value: 'jack', color: 'black'},
+    {cardSuit: 'spade', value: 'queen', color: 'black'},
+    {cardSuit: 'diamond', value: 'queen', color: 'red'},
+    {cardSuit: 'heart', value: 'queen', color: 'red'},
+    {cardSuit: 'clubs', value: 'queen', color: 'black'},
+    {cardSuit: 'spade', value: 'king', color: 'black'},
+    {cardSuit: 'diamond', value: 'king', color: 'red'},
+    {cardSuit: 'heart', value: 'king', color: 'red'},
+    {cardSuit: 'clubs', value: 'king', color: 'black'},
+    {cardSuit: 'spade', value: 'ace', color: 'black'},
+    {cardSuit: 'diamond', value: 'ace', color: 'red'},
+    {cardSuit: 'heart', value: 'ace', color: 'red'},
+    {cardSuit: 'clubs', value: 'ace', color: 'black'},
 ];
 // - знайти піковий туз
 console.log(cards.filter(value => value.cardSuit === 'spade' && value.value === 'ace'));
@@ -151,7 +150,7 @@ console.log('---------------------------------------------------------');
 
 
 // - всі трефи від 9 та більше
-console.log(cards.filter(value => value.value >= '9' || (parseInt(value.value) >= 9) ));
+console.log(cards.filter(value => value.value >= '9' || (parseInt(value.value) >= 9)));
 console.log('---------------------------------------------------------');
 
 
@@ -255,7 +254,7 @@ let coursesArray = [
 // --написати пошук всіх об'єктів, в який в modules є sass
 let objWithSass = coursesArray.filter(course => {
     for (const item of course.modules) {
-        if (item  === 'sass')
+        if (item === 'sass')
             return true;
     }
 })
@@ -266,8 +265,19 @@ console.log('---------------------------------------------------------');
 // --написати пошук всіх об'єктів, в який в modules є docker
 let objWithDocker = coursesArray.filter(course => {
     for (const item of course.modules) {
-        if (item  === 'docker')
+        if (item === 'docker')
             return true;
     }
 })
 console.log(objWithDocker);
+
+function removeChar(str) {
+    if (str.length !== 2) {
+        return str.substring(1, str.length - 1);
+        ;
+    } else return str;
+};
+console.log(removeChar('person'));
+
+
+
