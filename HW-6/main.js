@@ -163,21 +163,41 @@ console.log('---------------------------------------------------------');
 //     hearts:[],
 //     clubs:[]
 // }
-const spades = cards.filter(value => value.cardSuit === 'spade');
-console.log(spades);
-console.log('---------------------------------------------------------');
+// const spades = cards.filter(value => value.cardSuit === 'spade');
+// console.log(spades);
+// console.log('---------------------------------------------------------');
+const reduceResult = cards.reduce((accumulator, card) =>
+    {
+        switch (card.cardSuit) {
+            case 'spade':
+                accumulator.spades.push(card);
+                break;
+            case 'diamond':
+                accumulator.diamonds.push(card);
+                break;
+            case 'heart':
+                accumulator.hearts.push(card);
+                break;
+            case 'clubs':
+                accumulator.clubs.push(card);
+                break;
+        }
+        return accumulator;
+    }, {spades: [], diamonds: [], hearts: [], clubs: []});
+console.log(reduceResult);
 
-const diamonds = cards.filter(value => value.cardSuit === 'diamond');
-console.log(diamonds);
-console.log('---------------------------------------------------------');
 
-const hearts = cards.filter(value => value.cardSuit === 'heart');
-console.log(hearts);
-console.log('---------------------------------------------------------');
-
-const clubs = cards.filter(value => value.cardSuit === 'clubs');
-console.log(clubs);
-console.log('---------------------------------------------------------');
+// const diamonds = cards.filter(value => value.cardSuit === 'diamond');
+// console.log(diamonds);
+// console.log('---------------------------------------------------------');
+//
+// const hearts = cards.filter(value => value.cardSuit === 'heart');
+// console.log(hearts);
+// console.log('---------------------------------------------------------');
+//
+// const clubs = cards.filter(value => value.cardSuit === 'clubs');
+// console.log(clubs);
+// console.log('---------------------------------------------------------');
 
 
 // =========================
