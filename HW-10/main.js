@@ -24,7 +24,7 @@ formOne.onsubmit = function (e) {
 
 
 // ==========================
-    // є сторінка, на якій є блок, я кому знаходиьтся цифра. написати код, який при кожному перезавантажені сторінки буде додавати до неї +1
+// є сторінка, на якій є блок, я кому знаходиьтся цифра. написати код, який при кожному перезавантажені сторінки буде додавати до неї +1
 let counter = document.getElementById(`number`);
 onload = function (e) {
     let initialNumber = parseInt(localStorage.getItem("counter")) || 0;
@@ -40,6 +40,14 @@ reset.onclick = function () {
 // ==========================
 // Є сторінка index.html (назва довільна), при відвідуванні якої в локальне сховще, в масив sessions зберігається інформація про дату та час відвідування сторінки. Є ще сторінка sessions.html (назва довільна), при відвідуванні якої потрібно відмалювати всю інформацію про відвідування сторінки index.html. Інфу НЕ виводити в консоль, а побудувати дом структуру під кожну сессію
 // =========================
+let dateAndTime = function () {
+    let sessions = JSON.parse(localStorage.getItem('sessions')) || [];
+    let dateAndTimeVisit = new Date().toLocaleString();
+    sessions.push(dateAndTimeVisit);
+    localStorage.setItem('sessions', JSON.stringify(sessions));
+}
+dateAndTime();
+
 //     зробити масив на 100 об'єктів та дві кнопки prev next
 // при завантажені сторінки з'являються перші 10 об'єктів.
 //     При натисканні next виводяться настпні 10 об'єктів
@@ -73,24 +81,23 @@ for (let i = start; i < end; i++) {
     document.body.append(ul)
 }
 buttonNext[0].addEventListener(`click`, function () {
-    if (end < 100){
+    if (end < 100) {
         let y = end + 10;
         let i = start + 10;
-        localStorage.setItem(`start`,JSON.stringify(i));
-        localStorage.setItem(`end`,JSON.stringify(y));
+        localStorage.setItem(`start`, JSON.stringify(i));
+        localStorage.setItem(`end`, JSON.stringify(y));
 
     }
 });
 buttonPrev[0].addEventListener(`click`, function () {
-    if (start >0 ){
+    if (start > 0) {
         let y = end - 10;
         let i = start - 10;
-        localStorage.setItem(`start`,JSON.stringify(i));
-        localStorage.setItem(`end`,JSON.stringify(y));
+        localStorage.setItem(`start`, JSON.stringify(i));
+        localStorage.setItem(`end`, JSON.stringify(y));
 
     }
 })
-
 
 
 // - Створити довільний елемент з id = text та створити кнопку.Використовуючи JavaScript, зробіть так, щоб при натисканні на кнопку зникав елемент з id="text".
@@ -109,13 +116,12 @@ clearBtn.onclick = function (e) {
 }
 
 
-
 //     - створити інпут який приймає вік людини та кнопку яка підтверджує дію.При натисканні на кнопку зчитати інформацію з інпуту та перевірити вік чи меньше він ніж 18, та повідомити про це користувача
 let formAge = document.forms.ageCondition;
 let ageInput = formAge[0];
 let btnCheckAge = formAge[1];
 
-btnCheckAge.onclick = function(e) {
+btnCheckAge.onclick = function (e) {
     e.preventDefault();
     let age = ageInput.valueAsNumber;
     let paragraph = document.createElement('p');
@@ -131,8 +137,37 @@ btnCheckAge.onclick = function(e) {
 // *** Створити 3 інпута та кнопку. Один визначає кількість рядків, другий - кількість ячеєк, третій вмиіст ячеєк.
 //     При натисканні кнопки, вся ця інформація зчитується і формується табличка, з відповідним вмістом.
 // (Додатковачастина для завдання)
-//
+let gridContainer = document.createElement('div');
+gridContainer.classList.add('grid');
+let gridForm = document.forms.gridForm;
+let row, column, innerText = "";
+
+let buildTable = function (row, column, innerText){
+    gridContainer.innerHTML = "";
+    for (let i = 0; i < row * column; i++) {
+        let div = document.createElement('div');
+        div.style.border = '1px solid black';
+        div.textContent = innerText;
+        gridContainer.appendChild(div);
+    }
+    gridContainer.style.gridTemplateRows = `repeat(${row}, 1fr)`;
+    gridContainer.style.gridTemplateColumns = `repeat(${column}, 1fr)`;
+
+    document.body.appendChild(gridContainer);
+}
+gridForm.btnBuild.onclick = function (e) {
+    e.preventDefault();
+    row = parseInt(gridForm.row.value);
+    column = parseInt(gridForm.column.value);
+    innerText = gridForm.innerText.value;
+    buildTable(row, column, innerText);
+}
+
+
 // *** (подібне було вище, але...будьте уважні в другій частині) створити сторінку з довільним блоком, в середині якого є значення "100грн"
 // при перезавантаженні сторінки до значаення додається по 10грн, але !!!
 //     зміна ціни відбувається тільки на перезавантаження, які відбулись пізніше ніж 10 секунд після попереднього.
 //     При перезавантаженні, яке відбулось раніше ніж минуло 10 секунд - нічого не відбувається
+
+
+// розв'язок в скрипті файла 100UAH.html

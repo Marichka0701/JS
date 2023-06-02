@@ -26,6 +26,11 @@
         padding: 20px;
         margin-bottom: 10px;
     }
+    .grid {
+        display: grid;
+        max-width: 1000px;
+        max-height: 1000px;
+    }
 </style>
 <body>
 <!--task 1-->
@@ -78,7 +83,31 @@
     <div>
         <button name="condition" id="condition">check</button>
     </div>
+    <br><br><br>
 </form>
+
+
+<form name="gridForm" action="">
+    <label for="row">
+        Row
+        <input type="number" name="row" id="row">
+    </label>
+    <label for="column">
+        Column
+        <input type="number" name="column" id="column">
+    </label>
+    <label for="innerText">
+        Inner text
+        <input type="text" name="innerText" id="innerText">
+    </label>
+    <br>
+    <div>
+        <button name="btnBuild">build</button>
+    </div>
+    <br><br><br>
+</form>
+
+<!--<div class="grid"></div>-->
 
 <script src="main.js"></script>
 

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div class="money"></div>
+
+<script>
+
+    onload = function () {
+        let block = document.getElementsByClassName('money')[0];
+
+        let addMoney = JSON.parse(localStorage.getItem('money')) || [];
+        let addSeconds = JSON.parse(localStorage.getItem('seconds')) || [];
+
+        let lastLoading = addMoney.length > 0 ? addSeconds[addSeconds.length - 1] : 0;
+        let lastSum = addSeconds.length > 0 ? addMoney[addMoney.length - 1] : 100;
+        let currentTime = new Date().getSeconds();
+        let currentSum = lastSum;
+
+
+        if ((currentTime - lastLoading) > 10) {
+            currentSum = lastSum + 10;
+            block.innerHTML = `${currentSum} грн`;
+        }
+
+        addMoney.push(currentSum);
+        addSeconds.push(currentTime);
+        localStorage.setItem('money', JSON.stringify(addMoney));
+        localStorage.setItem('seconds', JSON.stringify(addSeconds));
+    }
+
+</script>
+
+</body>
+</html>
