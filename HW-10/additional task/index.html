@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .btn {
+            width: 150px;
+            height: 40px;
+            background: cornflowerblue;
+            border: none;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .menu {
+            width: 200px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid cornflowerblue;
+        }
+
+        .hide-menu {
+            margin-top: 20px;
+        }
+
+        .menu.hidden ul {
+            display: none;
+        }
+        .comments > ul {
+            list-style: none;
+        }
+        .comments>ul>li>h2::before {
+            content: '▶ ';
+            color: red;
+            left:0;
+        }
+
+        .comments>ul>li.hidden>h2::before {
+            content: '▼ ';
+            top:1px;
+        }
+        .comments>ul>li.hidden>p {
+            display: none;
+        }
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            border: 1px solid red;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .containerImg {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .img {
+            width: 33%;
+            height: 500px;
+        }
+        .buttons, .buttonsAnother {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<form name="form1">
+    <label for="wordInArray">
+        Word in array
+        <input type="text" name="wordInArray" id="wordInArray">
+    </label>
+    <div>
+        <button name="check1">check</button>
+    </div>
+</form>
+<br>
+<form name="form2">
+    <label for="isInArray">
+        Is in array
+        <input type="text" name="isInArray" id="isInArray">
+    </label>
+    <div>
+        <button name="check2">check</button>
+    </div>
+</form>
+<br>
+<form name="checkbox" action="">
+    <label for="false">
+        By false
+        <input type="checkbox" name="filterFalse" id="false">
+    </label>
+    <label for="age">
+        By Age > 29
+        <input type="checkbox" name="filterAge" id="age">
+    </label>
+    <label for="city">
+        By city in Kyiv
+        <input type="checkbox" name="filterCity" id="city">
+    </label>
+</form>
+<div class="div-container"></div>
+<br>
+<div class="menu">
+    <ul>
+        <li>давно</li>
+        <li>у мене</li>
+        <li>так мозок</li>
+        <li>не кипів</li>
+    </ul>
+</div>
+<div class="menu-btn">
+    <button name="hideMenu" class="hide-menu">hide menu-list</button>
+</div>
+<br>
+<form name="disappearingBtn" action="">
+    <div>
+        <button name="btn" class="btn">hide button</button>
+    </div>
+</form>
+<br>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span id="close" class="close">&times;</span>
+        <p class="description">sfdsfds dsfjnndfj</p>
+    </div>
+</div>
+<br>
+<div class="structure">
+    <div>
+        <ul>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+        </ul>
+    </div>
+</div>
+<script src="main.js"></script>
+
+</body>
+</html>
