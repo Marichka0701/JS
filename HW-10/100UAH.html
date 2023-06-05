@@ -28,6 +28,8 @@
         if ((currentTime - lastLoading) > 10) {
             currentSum = lastSum + 10;
             block.innerHTML = `${currentSum} грн`;
+        } else {
+            block.innerHTML = `${currentSum} грн`;
         }
 
         addMoney.push(currentSum);
