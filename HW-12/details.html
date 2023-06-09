@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Details</title>
+</head>
+<body>
+
+
+<script>
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('id');
+
+    displayObj = (obj) => {
+        for (const key in obj) {
+            if ( typeof(obj[key]) === 'object') {
+                displayObj(obj[key]);
+            }
+            else {
+                let div = document.createElement('div');
+                div.innerText = `${key} - ${obj[key]}`;
+                document.body.appendChild(div);
+            }
+        }
+    }
+
+    fetch(`http://jsonplaceholder.typicode.com/users/${userId}`)
+        .then((response) => response.json())
+        .then((user) => {
+            displayObj(user);
+        });
+
+</script>
+
+</body>
+</html>
