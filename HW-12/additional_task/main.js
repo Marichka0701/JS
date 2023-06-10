@@ -1,43 +1,103 @@
-// 1.
-// Отримати відповідь з цього ресурсу відповідь, та вивести в документ як в прикладі на занятті
-// https://jsonplaceholder.typicode.com/users
-//     кожному елементу юзера створити кнопку, при клику на яку в окремий блок виводяться всі пости поточного юзера.
-//     Кожному елементу post створити кнопку, при клику на яку в окремий блок виводяться всі коментарі поточного поста
+// // 1.
+// // Отримати відповідь з цього ресурсу відповідь, та вивести в документ як в прикладі на занятті
+// // https://jsonplaceholder.typicode.com/users
+// //     кожному елементу юзера створити кнопку, при клику на яку в окремий блок виводяться всі пости поточного юзера.
+// //     Кожному елементу post створити кнопку, при клику на яку в окремий блок виводяться всі коментарі поточного поста
+// //
+// const container = document.getElementsByClassName('container')[0];
+// fetch('https://jsonplaceholder.typicode.com/users')
+//     .then((response) => response.json())
+//     .then((users) => {
+//         for(const user of users) {
+//             let div = document.createElement('div');
+//             div.classList.add('user-block');
+//             div.innerHTML = `<h4>id: ${user.id}, name: ${user.name}</h4> <button class="btn-post">all posts</button>`;
+//             container.append(div);
 //
+//             fetch(`https://jsonplaceholder.typicode.com/posts?userId=${user.id}`)
+//                 .then((response) => response.json())
+//                 .then((value) => {
+//                     let btnPostCollection = document.querySelector('.btn-post');
+//                     btnPostCollection[user.id].addEventListener('click', function () {
+//                         // let postContainer = document.getElementsByClassName('post-container')[0];
+//                         // postContainer.innerText = ``;
+//                         console.log(value);
+//                     })
+//                 })
+//         }
+//     });
+
+
 const container = document.getElementsByClassName('container')[0];
 fetch('https://jsonplaceholder.typicode.com/users')
     .then((response) => response.json())
     .then((users) => {
-        for(const user of users) {
+        for (const user of users) {
             let div = document.createElement('div');
             div.classList.add('user-block');
             div.innerHTML = `<h4>id: ${user.id}, name: ${user.name}</h4> <button class="btn-post">all posts</button>`;
-            // // let btn = document.createElement('button');
-            // // btn.innerText = `all posts`;
-            // ${btn}`;
             container.append(div);
         }
-        handleButtonEvents();
-        // document.body.appendChild(div);
+        handleButtonEvents(users);
     });
-function handleButtonEvents() {
-    let modal = document.getElementById('myModal');
-    let btnModalOpenList = document.querySelectorAll(".btn-post");
-    console.log(btnModalOpenList);
+
+function handleButtonEvents(users) {
+    let postContainer = document.getElementById('post-container');
+    let btnModalOpenList = document.querySelectorAll('.btn-post');
 
     // Add click event handler to each button
-    btnModalOpenList.forEach((btn) => {
-        btn.addEventListener('click', function() {
-            modal.style.display = 'block';
-            // Add code to handle fetching and displaying posts
+    btnModalOpenList.forEach((btn, index) => {
+        btn.addEventListener('click', function () {
+            let userId = users[index].id;
+            fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+                .then((response) => response.json())
+                .then((posts) => {
+                    postContainer.innerHTML = ""; // Clear previous posts
+                    for (const post of posts) {
+                        let postDiv = document.createElement('div');
+                        postDiv.innerHTML = `<h5>${post.title}</h5><p>${post.body}</p>`;
+                        postContainer.appendChild(postDiv);
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         });
     });
-
-    let spanX = document.getElementById('close');
-    spanX.addEventListener('click', function() {
-        modal.style.display = 'none';
-    });
 }
+
+// Add click event handler to each button
+
+
+        // handleButtonEvents();
+
+// function handleButtonEvents() {
+//     let modal = document.getElementById('myModal');
+//     let btnModalOpenList = document.querySelectorAll(".btn-post");
+//     console.log(btnModalOpenList);
+//
+//     // Add click event handler to each button
+//     btnModalOpenList.forEach((btn) => {
+//         btn.addEventListener('click', function() {
+//             modal.style.display = 'block';
+//             // Add code to handle fetching and displaying posts
+//         });
+//     });
+//
+//     let spanX = document.getElementById('close');
+//     spanX.addEventListener('click', function() {
+//         modal.style.display = 'none';
+//     });
+// }
+
+
+
+
+
+
+
+
+
 // let modal = document.getElementById('myModal');
 // let btnModalOpenList = document.querySelectorAll(".btn-post");
 // console.log(btnModalOpenList);
