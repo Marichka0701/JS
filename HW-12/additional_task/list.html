@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #delete-all-btn {
+        width: 200px;
+        height: 30px;
+        background: lightskyblue;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.7s;
+    }
+
+    #delete-all-btn:hover {
+        transform: scale(1.1);
+        transition: 0.7s;
+    }
+
+    #products-container img {
+        width: 200px;
+    }
+</style>
+<body>
+
+<h1>Список товарів</h1>
+<button id="delete-all-btn">Видалити всі товари</button>
+<br>
+<br>
+<br>
+<div id="products-container"></div>
+
+<script>
+    displayObj = (item, container, index) => {
+        const product = document.createElement('div');
+
+        const info = document.createElement('div');
+        info.innerHTML = `<b>Name:</b> ${item.productName} <br> <b>Price:</b> ${item.productPrice} <br> <b>Count:</b> ${item.productCount}`;
+
+        const img = document.createElement('img')
+        img.src = item.productImage;
+
+        const button = document.createElement('button');
+        button.innerText = 'delete';
+
+        product.append(img, info, button);
+
+        button.addEventListener('click', () => {
+            const basket = JSON.parse(localStorage.getItem('basket')) || [];
+            basket.splice(index, 1);
+            localStorage.setItem('basket', JSON.stringify(basket));
+            location.reload();
+        })
+
+        container.appendChild(product);
+    }
+
+    const container = document.getElementById('products-container');
+    const basket = JSON.parse(localStorage.getItem('basket')) || [];
+    for (let i = 0; i < basket.length; i++) {
+        const index = i;
+        displayObj(basket[i], container, index);
+    }
+    const button = document.getElementById('delete-all-btn');
+    button.onclick = () => {
+        container.innerText = '';
+        localStorage.clear();
+    }
+
+
+</script>
+
+</body>
+</html>

@@ -4,153 +4,56 @@
 // //     кожному елементу юзера створити кнопку, при клику на яку в окремий блок виводяться всі пости поточного юзера.
 // //     Кожному елементу post створити кнопку, при клику на яку в окремий блок виводяться всі коментарі поточного поста
 // //
-// const container = document.getElementsByClassName('container')[0];
-// fetch('https://jsonplaceholder.typicode.com/users')
-//     .then((response) => response.json())
-//     .then((users) => {
-//         for(const user of users) {
-//             let div = document.createElement('div');
-//             div.classList.add('user-block');
-//             div.innerHTML = `<h4>id: ${user.id}, name: ${user.name}</h4> <button class="btn-post">all posts</button>`;
-//             container.append(div);
-//
-//             fetch(`https://jsonplaceholder.typicode.com/posts?userId=${user.id}`)
-//                 .then((response) => response.json())
-//                 .then((value) => {
-//                     let btnPostCollection = document.querySelector('.btn-post');
-//                     btnPostCollection[user.id].addEventListener('click', function () {
-//                         // let postContainer = document.getElementsByClassName('post-container')[0];
-//                         // postContainer.innerText = ``;
-//                         console.log(value);
-//                     })
-//                 })
-//         }
-//     });
-
-
 const container = document.getElementsByClassName('container')[0];
 fetch('https://jsonplaceholder.typicode.com/users')
     .then((response) => response.json())
     .then((users) => {
         for (const user of users) {
-            let div = document.createElement('div');
-            div.classList.add('user-block');
-            div.innerHTML = `<h4>id: ${user.id}, name: ${user.name}</h4> <button class="btn-post">all posts</button>`;
-            container.append(div);
+            const userBlock = document.createElement('div');
+            userBlock.classList.add('user-block');
+            const info = document.createElement('div');
+            info.innerText = `id: ${user.id}, name: ${user.name}`;
+            const button = document.createElement('button');
+            button.classList.add('btn-post');
+            button.innerText = 'all posts';
+
+            userBlock.append(info, button);
+            container.append(userBlock);
+
+            button.addEventListener('click', () => {
+                const postContainer =  document.getElementById('post-container');
+                postContainer.innerText = ``;
+                fetch('https://jsonplaceholder.typicode.com/posts?userId='+user.id)
+                    .then((response) => response.json())
+                    .then((posts) => {
+                        for (const post of posts) {
+                            const postId = post.id;
+
+                            const div = document.createElement('div');
+                            div.innerHTML = `<b>title: </b>${post.title} <br> <b>body: </b>${post.body}<br>`;
+                            const btn = document.createElement('button');
+                            btn.innerText = 'all comments';
+                            btn.classList.add('btn-comment');
+                            div.append(btn, document.createElement('br'), document.createElement('br'));
+                            postContainer.appendChild(div);
+                            btn.addEventListener('click', () => {
+                                const commentsBlock = document.getElementById('comments-container');
+                                commentsBlock.innerText = '';
+                                fetch('https://jsonplaceholder.typicode.com/comments?postId='+postId)
+                                    .then((response) => response.json())
+                                    .then((comments) => {
+                                        for (const comment of comments) {
+                                            const commentBlock = document.createElement('div');
+                                            commentBlock.innerHTML = `<b>name:</b> ${comment.name} <br> <b>email:</b> ${comment.email} <br> <b>body:</b> ${comment.body}`
+                                            commentsBlock.append(commentBlock, document.createElement('br'), document.createElement('br'));
+                                        }
+                                    })
+                            })
+                        }
+                    })
+            })
         }
-        handleButtonEvents(users);
     });
-
-function handleButtonEvents(users) {
-    let postContainer = document.getElementById('post-container');
-    let btnModalOpenList = document.querySelectorAll('.btn-post');
-
-    // Add click event handler to each button
-    btnModalOpenList.forEach((btn, index) => {
-        btn.addEventListener('click', function () {
-            let userId = users[index].id;
-            fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
-                .then((response) => response.json())
-                .then((posts) => {
-                    postContainer.innerHTML = ""; // Clear previous posts
-                    for (const post of posts) {
-                        let postDiv = document.createElement('div');
-                        postDiv.innerHTML = `<h5>${post.title}</h5><p>${post.body}</p>`;
-                        postContainer.appendChild(postDiv);
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        });
-    });
-}
-
-// Add click event handler to each button
-
-
-        // handleButtonEvents();
-
-// function handleButtonEvents() {
-//     let modal = document.getElementById('myModal');
-//     let btnModalOpenList = document.querySelectorAll(".btn-post");
-//     console.log(btnModalOpenList);
-//
-//     // Add click event handler to each button
-//     btnModalOpenList.forEach((btn) => {
-//         btn.addEventListener('click', function() {
-//             modal.style.display = 'block';
-//             // Add code to handle fetching and displaying posts
-//         });
-//     });
-//
-//     let spanX = document.getElementById('close');
-//     spanX.addEventListener('click', function() {
-//         modal.style.display = 'none';
-//     });
-// }
-
-
-
-
-
-
-
-
-
-// let modal = document.getElementById('myModal');
-// let btnModalOpenList = document.querySelectorAll(".btn-post");
-// console.log(btnModalOpenList);
-// btnModalOpenList.forEach((btnModalOpen) => {
-//     btnModalOpen.onclick = function(e) {
-//         modal.style.display = 'block';
-//         // let userId = this.id.split('-')[2];
-//         // let description = document.getElementById('description');
-//         //
-//         // fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
-//         //     .then((response) => response.json())
-//         //     .then((posts) => {
-//         //         let postList = '';
-//         //         for (const post of posts) {
-//         //             postList += `Title: ${post.title}\nBody: ${post.body}\n\n`;
-//         //         }
-//         //         description.innerText = postList;
-//         //     })
-//     }
-// });
-
-// let spanX = document.getElementById('close');
-// spanX.onclick = function(e) {
-//     let modal = document.getElementById('myModal');
-//     modal.style.display = 'none';
-// }
-
-// let modal = document.getElementById('myModal');
-// // let btnModalOpen = document.getElementById('btn-post');
-// let btnModalOpen = document.getElementById('btn-post');
-// // let btnModalOpen = document.getElementsByClassName('open-btn')[0];
-// btnModalOpen.onclick = function(e) {
-//     modal.style.display = 'block';
-//     // let description = document.getElementById('description');
-//     // fetch(`https://jsonplaceholder.typicode.com/posts?userID=${user.id}`)
-//     //     .then((response) => response.json())
-//     //     .then((post) => {
-//     //         description.innerText = post;
-//     //     })
-// }
-//
-// let spanX = document.getElementById('close');
-// spanX.onclick = function(e) {
-//     let modal = document.getElementById('myModal');
-//     modal.style.display = 'none';
-// }
-// spanX.addEventListener('click', function (e) {
-//     // e.preventDefault();
-//     modal.style.display = 'none';
-//     // let modal = document.getElementById('myModal');
-//     // modal.style.display = 'none';
-// });
-
 
 
 // 1.
@@ -158,7 +61,39 @@ function handleButtonEvents(users) {
 // https://jsonplaceholder.typicode.com/posts
 //     зробити кнопку до кожного поста. при кліку на яку виводяться в окремий блок всі коментарі поточного поста
 //
-//
+fetch('https://jsonplaceholder.typicode.com/posts')
+    .then((response) => response.json())
+    .then((posts) => {
+        const postsContainer = document.getElementById('posts-container-task2');
+
+        for (const post of posts) {
+            const postContainer = document.createElement('div');
+            postContainer.innerHTML = `<b>title: </b> ${post.title} <br> <b>body: </b> ${post.body}`;
+
+            const button = document.createElement('button');
+            button.innerText = 'show comments';
+            button.classList.add('show-comments');
+
+            postsContainer.append(postContainer, button);
+            // postsContainer.innerHTML += `<br><br><br>`;
+
+            const postId = post.id;
+
+            button.addEventListener('click', () => {
+                fetch('https://jsonplaceholder.typicode.com/comments?postId='+postId)
+                    .then((response) => response.json())
+                    .then((comments) => {
+                        for (const comment of comments) {
+                            const commentBlock = document.createElement('div');
+                            commentBlock.innerHTML = `<b>name:</b> ${comment.name} <br> <b>email:</b> ${comment.email} <br> <b>body:</b> ${comment.body}`
+                            postContainer.append(document.createElement('br'), document.createElement('br'), commentBlock, document.createElement('br'), document.createElement('br'));
+                        }
+                    })
+            });
+        }
+    })
+
+
 // - Імітуємо наповнення інтернет магазину товарами :
 //     Створити форму з наступними полями :
 //     - назва товару
@@ -169,3 +104,59 @@ function handleButtonEvents(users) {
 // створити елемент <a href='list.html'> На сторінку товарів</a>, та list.html, при переході на який відобразити на сторінці всі товари.
 // На сторінці  list.html побудувати кнопку яка видаляє всі товари з корзини та локалстораджа.
 //     До кожного товару додати кнопку, при кліку на яку з лс видаляється конкретний обраний  товар
+const products = [
+    {
+        id: 1,
+        name: "iPhone 12",
+        image: "https://apiua.icoola.ua/aimeos/1.d/files/b/a/bafc3e4c_apple-12-iphone-128gb-icoola-purple1.jpg",
+        price: 999,
+    },
+    {
+        id: 2,
+        name: "Samsung Galaxy S21",
+        image: "https://files.foxtrot.com.ua/PhotoNew/img_0_60_8803_0_1_637976439084618029.webp",
+        price: 899,
+    },
+    {
+        id: 3,
+        name: "Google Pixel 5",
+        image: "https://i.allo.ua/media/catalog/product/cache/1/image/524x494/602f0fa2c1f0d1ba5e241f914e856ff9/g/o/google_pixel_5_just_black_1_1.jpg",
+        price: 699,
+    },
+    {
+        id: 4,
+        name: "Sony PlayStation 5",
+        image: "https://content1.rozetka.com.ua/goods/images/big/134042269.jpg",
+        price: 499,
+    },
+    {
+        id: 5,
+        name: "Nintendo Switch",
+        image: "https://content.rozetka.com.ua/goods/images/big/231289461.jpg",
+        price: 299,
+    },
+];
+
+const productForm = document.getElementById('product-form');
+productForm.addEventListener('submit', (e)=> {
+    e.preventDefault();
+    const form = document.getElementById('product-form');
+
+    const productName =form['product-name'].value;
+    const productCount =form['product-quantity'].value;
+    const productPrice =form['product-price'].value;
+    const productImage =form['product-image'].value;
+
+    const backet = JSON.parse(localStorage.getItem('basket')) || [];
+    backet.push({
+        productName,
+        productCount,
+        productPrice,
+        productImage
+    });
+    localStorage.setItem('basket', JSON.stringify(backet));
+
+    form.reset();
+})
+
+
